@@ -47,7 +47,7 @@ Aplikacja posiada klasyczny interfejs webowy oparty o szablony Thymeleaf oraz do
 - automatyczne zadania harmonogramu dla statusów samochodów i rezerwacji,
 - eksport danych przez REST API w formacie JSON oraz XML.
 
-## Technologie
+## Technologie & Narzędzia
 
 Projekt wykorzystuje:
 
@@ -66,26 +66,9 @@ Projekt wykorzystuje:
 - Jackson JSON/XML,
 - iText PDF,
 - Google reCAPTCHA.
+- Maven 
+- Apache Tomcat 10+ 
+- PostgreSQL
 
-
-## Narzędzia
-
-Do budowania, uruchamiania i zarządzania projektem wykorzystywane są:
-
-- Maven — budowanie projektu i zarządzanie zależnościami,
-- Apache Tomcat 10+ — serwer aplikacyjny do uruchomienia pliku WAR,
-- PostgreSQL — system zarządzania relacyjną bazą danych.
-
-## Wymagania
-
-Do uruchomienia aplikacji wymagane są:
-
-- JDK 23,
-- Maven,
-- PostgreSQL,
-- serwer aplikacyjny obsługujący pliki WAR i Jakarta Servlet 6, np. Apache Tomcat 10+,
-- konto e-mail do wysyłki wiadomości aktywacyjnych,
-- klucze Google reCAPTCHA.
-
-
+## Przed uruchomieniem
 Przed uruchomieniem należy utworzyć bazę danych PostgreSQL. Następnie trzeba ustawić zmienne środowiskowe wymagane przez aplikację.
