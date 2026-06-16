@@ -67,34 +67,6 @@ Projekt wykorzystuje:
 - iText PDF,
 - Google reCAPTCHA.
 
-## Architektura i wzorce
-
-Aplikacja została zbudowana w oparciu o architekturę warstwową oraz wzorzec MVC.
-
-### MVC
-
-Projekt wykorzystuje wzorzec **Model-View-Controller**:
-
-- **Model** — encje domenowe, DTO oraz logika biznesowa,
-- **View** — widoki HTML przygotowane w Thymeleaf,
-- **Controller** — kontrolery obsługujące żądania użytkownika i zwracające odpowiednie widoki lub dane.
-
-### Architektura warstwowa
-
-Kod aplikacji został podzielony na warstwy odpowiedzialne za konkretne zadania:
-
-- `controller` — obsługa żądań HTTP,
-- `service` — logika biznesowa,
-- `repository` — dostęp do danych,
-- `domain` — encje domenowe,
-- `dto` — obiekty transferu danych,
-- `mapper` — mapowanie pomiędzy encjami i DTO,
-- `validator` — walidacja danych,
-- `configuration` — konfiguracja aplikacji.
-
-### Dependency Injection
-
-Aplikacja wykorzystuje mechanizm **Dependency Injection** dostarczany przez Spring Framework. Dzięki temu zależności pomiędzy komponentami są zarządzane przez kontener Springa.
 
 ## Narzędzia
 
