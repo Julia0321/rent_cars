@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        h1 { font-size: 44px; color: white; }
+        .tile {
+            transition: transform .12s ease, box-shadow .12s ease;
+            border-radius: 16px;
+        }
+        .tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+        }
+        .glass {
+            background: rgba(255,255,255,.88);
+            border-radius: 18px;
+        }
+        a {
+            color: white;
+        }
+    </style>
+</head>
+
+<body th:style="'background: url(' + @{/resources/images/tlo.png} + ') center/cover no-repeat fixed;'">
+<a th:href="@{?(lang='pl')}">PL</a>
+<a th:href="@{?(lang='en')}">EN</a>
+<a th:href="@{?(lang='de')}">DE</a>
+
+<div class="container py-4">
+
+    <h1 class="text-center mb-4" th:text="#{label.title.admin}">Admin panel</h1>
+
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <div th:if="${msg}" class="alert alert-success" th:text="${msg}"></div>
+
+    <div class="row g-3 justify-content-center">
+
+        <div class="col-12 col-md-4">
+            <div class="card tile glass h-100 shadow-sm border border-primary">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <h2 class="h5 mb-0 fw-bold" th:text="#{label.reservations}">Reservations</h2>
+                        <div class="text-muted small" th:text="#{label.manage}">Manage all reservations</div>
+                    </div>
+                    <a class="btn btn-primary w-100 mt-3" th:href="@{/admin/reservations}" th:text="#{label.go}">
+                        Go to reservations
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card tile glass h-100 shadow-sm border border-warning">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <h2 class="h5 mb-0 fw-bold" th:text="#{label.users}">Users</h2>
+                        <div class="text-muted small" th:text="#{label.manage.users}">Manage users</div>
+                    </div>
+                    <a class="btn btn-warning w-100 mt-3" th:href="@{/admin/users}" th:text="#{label.go.users}">
+                        Go to users
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <div class="card tile glass h-100 shadow-sm border border-success">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <h2 class="h5 mb-0 fw-bold" th:text="#{label.cars}">Cars</h2>
+                        <div class="text-muted small" th:text="#{label.manage.cars}">Manage cars</div>
+                    </div>
+                    <a class="btn btn-success w-100 mt-3" th:href="@{/admin/cars}" th:text="#{label.go.cars}">
+                        Go to cars
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <a class="btn btn-outline-light" th:href="@{/user/dashboard}" th:text="#{label.back.to.user.panel}">
+            ← Back to user panel
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

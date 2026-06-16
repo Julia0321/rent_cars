@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        .b {
+            width: 200px;
+            font-weight: bolder
+        }
+        h1 {
+            font-size: 48px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body th:style="'background: url(' + @{/resources/images/tlo.png} + ') center/cover no-repeat fixed;'">
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="text-center">
+        <h1 class="mt-5" th:text="#{label.confirmed}">Payment confirmed!</h1>
+    </div>
+</div>
+<div class="d-flex justify-content-center mt-4">
+    <a class="btn btn-outline-light" th:href="@{/user/dashboard}" th:text="#{label.back.to.user.panel}">
+        ← Back to user panel
+    </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <style>
+        h1 { font-size: 48px; color: white; }
+        .bold { font-weight: bolder; }
+        .login-card { background: rgba(255,255,255,0.9); border-radius: 16px; }
+    </style>
+</head>
+
+<body th:style="'background: url(' + @{/resources/images/tlo.png} + ') center/cover no-repeat fixed;'">
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4">
+
+            <h1 class="text-center mb-4 bold" th:text="#{label.login.page}"></h1>
+
+            <div class="card shadow login-card">
+                <div class="card-body p-4">
+
+                    <div th:if="${param.error}" class="alert alert-danger"
+                         th:text="${param.error[0] == 'inactive'} ? #{login.error.inactive} : #{login.error.invalid}">
+                    </div>
+
+                    <div th:if="${param.logout}" class="alert alert-success" th:text="#{label.logged.out}"></div>
+
+                    <form th:action="@{/login}" method="post" novalidate>
+
+                        <div class="mb-3">
+                            <label for="login" class="form-label bold" th:text="#{label.login.email}"></label>
+                            <input id="login"
+                                   name="login"
+                                   type="text"
+                                   class="form-control"
+                                   th:placeholder="#{label.enter.login}"
+                                   th:value="${param.login}"
+                                   autocomplete="username"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label bold" th:text="#{label.enter.password}"></label>
+                            <input id="password"
+                                   name="password"
+                                   type="password"
+                                   class="form-control"
+                                   th:placeholder="#{label.enter.password}"
+                                   autocomplete="current-password"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="g-recaptcha" th:attr="data-sitekey=${siteKey}"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-warning w-100 bold" th:text="#{label.log}"></button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

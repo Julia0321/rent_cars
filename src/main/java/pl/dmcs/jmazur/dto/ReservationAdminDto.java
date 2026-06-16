@@ -1,0 +1,34 @@
+package pl.dmcs.jmazur.dto;
+
+import lombok.*;
+import pl.dmcs.jmazur.enums.PaymentStatusEnum;
+import pl.dmcs.jmazur.enums.ReservationStatusEnum;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ReservationAdminDto {
+
+    private String reservationUuid;
+
+    private LocalDate from;
+    private LocalDate to;
+
+    private String carBrand;
+    private String carModel;
+
+    private String email;
+
+    private ReservationStatusEnum reservationStatus;
+
+    private BigDecimal totalPrice;
+
+    private PaymentStatusEnum paymentStatus;
+
+    private String paymentUuid;
+}

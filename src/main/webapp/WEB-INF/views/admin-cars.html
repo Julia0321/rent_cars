@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Cars</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        h1 { font-size: 44px; color: white; }
+        .glass { background: rgba(255,255,255,.88); border-radius: 18px; }
+    </style>
+</head>
+
+<body th:style="'background: url(' + @{/resources/images/tlo.png} + ') center/cover no-repeat fixed;'">
+
+<div class="container py-4">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+        <h1 class="text-center m-0 flex-grow-1" th:text="#{label.cars.title}">Cars</h1>
+
+        <a class="btn btn-primary" th:href="@{/admin/cars/new}" th:text="#{label.add.car.button}">
+            + Add car
+        </a>
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger" th:text="#{${error}}"></div>
+    <div th:if="${msg}" class="alert alert-success" th:text="#{${msg}}"></div>
+
+    <div class="card glass shadow-sm">
+        <div class="card-body">
+
+            <div th:if="${#lists.isEmpty(cars)}" class="alert alert-warning mb-0" th:text="#{label.no.cars}">
+                No cars
+            </div>
+
+            <div th:if="${!#lists.isEmpty(cars)}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle text-center mb-0">
+                    <thead class="table-light">
+                    <tr>
+                        <th th:text="#{label.brand}">Brand</th>
+                        <th th:text="#{label.model}">Model</th>
+                        <th th:text="#{label.fuel}">Fuel</th>
+                        <th th:text="#{label.transmission}">Transmission</th>
+                        <th th:text="#{label.registrationNumber}">Registration</th>
+                        <th th:text="#{label.price}">Price/day</th>
+                        <th th:text="#{label.status}">Status</th>
+                        <th th:text="#{label.actions}" style="width: 260px;">Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="c : ${cars}">
+
+                        <td th:text="${c.brand}">Brand</td>
+                        <td th:text="${c.model}">Model</td>
+                        <td th:text="${c.fuel}">FUEL</td>
+                        <td th:text="${c.transmission}">TRANS</td>
+                        <td th:text="${c.registrationNumber}">REG</td>
+                        <td th:text="${c.pricePerDay + ' PLN'}">0 PLN</td>
+
+                        <td>
+                            <span th:if="${c.carStatus.name() == 'AVAILABLE'}" class="badge bg-success" th:text="#{label.available}">AVAILABLE</span>
+                            <span th:if="${c.carStatus.name() != 'AVAILABLE'}" class="badge bg-secondary"
+                                  th:text="${c.carStatus}">STATUS</span>
+                        </td>
+
+                        <td class="text-nowrap">
+
+                            <form class="d-inline"
+                                  th:action="@{/admin/cars/{uuid}/toggle(uuid=${c.uuid})}"
+                                  method="post"
+                                  th:onsubmit="|return confirm('#{label.change.avail}');|">
+                                <button type="submit"
+                                        class="btn btn-sm"
+                                        th:classappend="${c.carStatus.name() == 'AVAILABLE'} ? ' btn-warning' : ' btn-success'"
+                                        th:text="${c.carStatus.name() == 'AVAILABLE'} ? #{car.makeUnavailable} : #{car.makeAvailable}">
+                                    Toggle
+                                </button>
+                            </form>
+
+                            <form class="d-inline"
+                                  th:action="@{/admin/cars/{uuid}/delete(uuid=${c.uuid})}"
+                                  method="post"
+                                  th:onsubmit="|return confirm('#{label.delete.car}');|">
+                                <button type="submit" class="btn btn-sm btn-danger" th:text="#{label.delete}">
+                                    Delete
+                                </button>
+                            </form>
+
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <a class="btn btn-outline-light" th:href="@{/admin}" th:text="#{label.back.admin}">
+            ← Back to admin panel
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

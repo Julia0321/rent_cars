@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Users</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        h1 { font-size: 44px; color: white; }
+        .glass { background: rgba(255,255,255,.88); border-radius: 18px; }
+        .chip {
+            display: inline-block;
+            padding: .2rem .55rem;
+            border-radius: 999px;
+            font-size: .78rem;
+            border: 1px solid rgba(0,0,0,.15);
+            background: rgba(255,255,255,.7);
+            margin: 0 .2rem .2rem 0;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body th:style="'background: url(' + @{/resources/images/tlo.png} + ') center/cover no-repeat fixed;'">
+
+<div class="container py-4">
+
+    <h1 class="text-center mb-4" th:text="#{label.users}">Users</h1>
+
+    <div th:if="${error}" class="alert alert-danger" th:text="#{${error}}"></div>
+    <div th:if="${msg}" class="alert alert-success" th:text="#{${msg}}"></div>
+
+    <div class="card glass shadow-sm">
+        <div class="card-body">
+
+            <div th:if="${#lists.isEmpty(users)}" class="alert alert-warning mb-0" th:text="#{label.no.users}">
+                No users.
+            </div>
+
+            <div th:if="${!#lists.isEmpty(users)}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle text-center mb-0">
+                    <thead class="table-light">
+                    <tr>
+                        <th th:text="#{label.name}">Name</th>
+                        <th th:text="#{label.email}">E-mail</th>
+                        <th th:text="#{label.phoneNumber}">Phone</th>
+                        <th th:text="#{label.birth}">Birth</th>
+                        <th th:text="#{label.active}">Active</th>
+                        <th th:text="#{label.roles}">Roles</th>
+                        <th th:text="#{label.actions}">Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="u : ${users}">
+
+                        <td th:text="${u.firstname + ' ' + u.surname}">Name</td>
+
+                        <td>
+                            <span th:text="${u.email}">email</span>
+                        </td>
+
+                        <td th:text="${u.phoneNumber}">phone</td>
+
+                        <td th:text="${#temporals.format(u.dateOfBirth,'yyyy-MM-dd')}">birth</td>
+
+                        <td>
+                            <span th:if="${u.active}" class="badge bg-success" th:text="#{label.active}">ACTIVE</span>
+                            <span th:if="${!u.active}" class="badge bg-secondary" th:text="#{label.inactive}">INACTIVE</span>
+                        </td>
+
+                        <td class="text-start">
+                            <span th:if="${u.roles == null or #sets.isEmpty(u.roles)}" class="text-muted small">-</span>
+
+                            <span th:each="r : ${u.roles}"
+                                  class="chip"
+                                  th:text="${r.roleName != null ? r.roleName : r}">
+                                ROLE_USER
+                            </span>
+                        </td>
+
+                        <td class="text-nowrap">
+                            <form class="d-inline"
+                                  th:action="@{/admin/users/{uuid}/change(uuid=${u.uuid})}"
+                                  method="post"
+                                  th:onsubmit="|return confirm('#{label.activate.or.not}');|">
+                                <button type="submit" class="btn btn-sm btn-success" th:text="#{label.de.act}">
+                                    De/Activate
+                                </button>
+                            </form>
+
+                            <form class="d-inline"
+                                  th:if="${!#lists.contains(u.roles.![roleName.toString()], 'ADMIN')}"
+                                  th:action="@{/admin/users/{uuid}/make-admin(uuid=${u.uuid})}"
+                                  method="post"
+                                  th:onsubmit="|return confirm('#{label.add.question}');|">
+                                <button type="submit" class="btn btn-sm btn-primary" th:text="#{label.add.admin}">
+                                    Add admin
+                                </button>
+                            </form>
+
+                            <form class="d-inline"
+                                  th:if="${#lists.contains(u.roles.![roleName.toString()], 'ADMIN')}"
+                                  th:action="@{/admin/users/{uuid}/remove-admin(uuid=${u.uuid})}"
+                                  method="post"
+                                  th:onsubmit="|return confirm('#{label.remove.role}');|">
+                                <button type="submit" class="btn btn-sm btn-outline-primary" th:text="#{label.delete.admin}">
+                                    Delete admin
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <a class="btn btn-outline-light" th:href="@{/admin}" th:text="#{label.back.admin}">
+            ← Back to admin panel
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

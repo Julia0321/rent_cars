@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        .b {
+            width: 200px;
+            font-weight: bolder
+        }
+        h1 {
+            font-size: 48px;
+            color: white;
+        }
+        a {
+            color: white;
+        }
+    </style>
+</head>
+
+<body th:style="'background: url(' + @{/resources/images/tlo.png} + ') center/cover no-repeat fixed;'">
+<a th:href="@{?(lang='pl')}">PL</a>
+<a th:href="@{?(lang='en')}">EN</a>
+<a th:href="@{?(lang='de')}">DE</a>
+
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+        <div class="text-center">
+            <h1 th:text="#{label.welcome}" class="mt-5">Welcome!</h1>
+            <div class="d-flex gap-5">
+                <a th:href="@{/login}" th:text="#{label.login}" class="b btn btn-light">Log in</a>
+                <a th:href="@{/users/register}" th:text="#{label.register}" class="b btn btn-light">Register</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
