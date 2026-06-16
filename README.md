@@ -2,24 +2,6 @@
 
 Aplikacja webowa do zarządzania wypożyczalnią samochodów, przygotowana w technologii Spring Framework. System umożliwia użytkownikom rejestrację, logowanie, wyszukiwanie dostępnych samochodów, składanie rezerwacji oraz obsługę płatności. Administratorzy mają dostęp do panelu zarządzania samochodami, użytkownikami i rezerwacjami.
 
-## Spis treści
-
-- [Opis projektu](#opis-projektu)
-- [Funkcjonalności](#funkcjonalności)
-- [Technologie](#technologie)
-- [Architektura i wzorce](#architektura-i-wzorce)
-- [Narzędzia](#narzędzia)
-- [Wymagania](#wymagania)
-- [Konfiguracja](#konfiguracja)
-- [Zmienne środowiskowe](#zmienne-środowiskowe)
-- [Uruchomienie projektu](#uruchomienie-projektu)
-- [Struktura aplikacji](#struktura-aplikacji)
-- [Role użytkowników](#role-użytkowników)
-- [Internacjonalizacja](#internacjonalizacja)
-- [REST API](#rest-api)
-- [Baza danych](#baza-danych)
-- [Bezpieczeństwo](#bezpieczeństwo)
-- [Generowanie PDF](#generowanie-pdf)
 
 ## Opis projektu
 
@@ -133,3 +115,5 @@ Do uruchomienia aplikacji wymagane są:
 - konto e-mail do wysyłki wiadomości aktywacyjnych,
 - klucze Google reCAPTCHA.
 
+
+Przed uruchomieniem należy utworzyć bazę danych PostgreSQL. Następnie trzeba ustawić zmienne środowiskowe wymagane przez aplikację.
