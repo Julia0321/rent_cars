@@ -1,4 +1,4 @@
-# Rent Car
+# Rent Cars
 
 Aplikacja webowa do zarządzania wypożyczalnią samochodów, przygotowana w technologii Spring Framework. System umożliwia użytkownikom rejestrację, logowanie, wyszukiwanie dostępnych samochodów, składanie rezerwacji oraz obsługę płatności. Administratorzy mają dostęp do panelu zarządzania samochodami, użytkownikami i rezerwacjami.
 
